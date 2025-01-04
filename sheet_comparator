@@ -1,0 +1,22 @@
+Sub CompareSheets()
+    Dim ws1 As Worksheet, ws2 As Worksheet
+    Dim cell1 As Range, cell2 As Range
+    Dim diffCount As Long
+
+    ' Define sheets
+    Set ws1 = ThisWorkbook.Sheets("Sheet1")
+    Set ws2 = ThisWorkbook.Sheets("Sheet2")
+
+    diffCount = 0
+
+    ' Iterate through cells
+    For Each cell1 In ws1.UsedRange
+        Set cell2 = ws2.Cells(cell1.Row, cell1.Column)
+        If cell1.Value <> cell2.Value Then
+            cell1.Interior.Color = vbYellow
+            diffCount = diffCount + 1
+        End If
+    Next cell1
+
+    MsgBox diffCount & " differences found!"
+End Sub
